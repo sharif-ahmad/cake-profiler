@@ -12,9 +12,11 @@ add_library(poc_profiler STATIC
     "include/profilermanager.h"
     "include/logger.h"
     "include/triviallogger.h"
+    "include/profilercontainer.h"
     "src/triviallogger.cpp"
     "src/profiler.cpp"
     "src/profilermanager.cpp"
+    "src/profilercontainer.cpp"
     )
 
 add_executable(poc_test "test/test.cpp")

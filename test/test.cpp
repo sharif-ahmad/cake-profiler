@@ -23,6 +23,18 @@ void block_test()
     PROFILE_BLOCK_END;
 }
 
+void block_test_nested()
+{
+    PROFILE_BLOCK_START("block3");
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+    PROFILE_BLOCK_START("block4");
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    PROFILE_BLOCK_END;
+
+    PROFILE_BLOCK_END;
+}
+
 int main(int argc, char* argv[])
 {
     PROFILE_FUNCTION;
@@ -33,4 +45,5 @@ int main(int argc, char* argv[])
     }
 
     block_test();
+    block_test_nested();
 }
