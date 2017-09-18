@@ -30,7 +30,7 @@ void ProfilerManager::setLogger(std::shared_ptr<Logger> logger)
     pLogger = logger;
 }
 
-void ProfilerManager::addExecutionDuration(const std::string& name, std::chrono::high_resolution_clock::duration duration)
+void ProfilerManager::addExecutionDuration(const std::string& name, duration duration)
 {
     auto& tracker = durationTrackerMap[name];
 
@@ -44,9 +44,11 @@ void ProfilerManager::generateReport() const
 {
     auto reportFromTracker = [](const ExecutionDurationTracker& tracker)
     {
-        std::string ret = std::string(" min: ") + std::to_string(std::chrono::duration_cast<std::chrono::milliseconds> (tracker.min).count())
-            + std::string(" max: ") + std::to_string(std::chrono::duration_cast<std::chrono::milliseconds> (tracker.max).count())
-            + std::string(" average: ") + std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(tracker.sum).count()/static_cast<double>(tracker.count))
+        using std::chrono::duration_cast;
+
+        std::string ret = std::string(" min: ") + std::to_string(duration_cast<time_unit> (tracker.min).count())
+            + std::string(" max: ") + std::to_string(duration_cast<time_unit> (tracker.max).count())
+            + std::string(" average: ") + std::to_string(duration_cast<time_unit>(tracker.sum).count()/static_cast<double>(tracker.count))
             + std::string(" run count: ") + std::to_string(tracker.count);
 
         return ret;

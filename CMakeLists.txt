@@ -10,6 +10,7 @@ include_directories("include")
 
 add_library(poc_profiler STATIC
     "include/poc.h"
+    "include/pocdef.h"
     "include/profiler.h"
     "include/profilermanager.h"
     "include/logger.h"

@@ -1,7 +1,7 @@
 #ifndef __PROFILER_H__
 #define __PROFILER_H__
-#include <chrono>
 #include <string>
+#include <pocdef.h>
 
 namespace poc // piece of cake
 {
@@ -10,7 +10,7 @@ class ProfilerManager;
 
 class Profiler final
 {
-    std::chrono::high_resolution_clock::time_point start, end;
+    time_point start, end;
     std::string name;
 
     ProfilerManager& manager;

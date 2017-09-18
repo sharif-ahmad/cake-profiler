@@ -1,28 +1,10 @@
-/*
- * =====================================================================================
- *
- *       Filename:  profilermanager.h
- *
- *    Description:  
- *
- *        Version:  1.0
- *        Created:  09/16/2017 01:28:17 PM
- *       Revision:  none
- *       Compiler:  gcc
- *
- *         Author:  YOUR NAME (), 
- *   Organization:  
- *
- * =====================================================================================
- */
-
 #ifndef __PROFILERMANAGER_H__
 #define __PROFILERMANAGER_H__
 
-#include <chrono>
 #include <map>
 #include <memory>
 #include <limits>
+#include <pocdef.h>
 
 namespace poc
 {
@@ -33,11 +15,8 @@ class ProfilerManager final
 {
     struct ExecutionDurationTracker
     {
-        std::chrono::high_resolution_clock::duration
-            min{std::chrono::high_resolution_clock::duration::max()}
-            , max{std::chrono::high_resolution_clock::duration::min()}
-            , sum{std::chrono::high_resolution_clock::duration::zero()};
-        size_t count;
+        duration min{duration::max()}, max{duration::min()}, sum{duration::zero()};
+        size_t count{0};
     };
 
     std::map<std::string, ExecutionDurationTracker> durationTrackerMap;
@@ -57,7 +36,7 @@ public:
     static ProfilerManager& getInstance();
 
     void setLogger(std::shared_ptr<Logger> logger);
-    void addExecutionDuration(const std::string& name, std::chrono::high_resolution_clock::duration duration);
+    void addExecutionDuration(const std::string& name, duration duration);
 
     void generateReport() const;
 };
