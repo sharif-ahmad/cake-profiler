@@ -5,6 +5,26 @@
 #include <logger.h>
 #include <triviallogger.h>
 
+#ifdef __ANDROID__
+
+#include <sstream>
+
+namespace std
+{
+
+template <class T>
+std::string to_string(T n)
+{
+    std::stringstream ss;
+    ss << n;
+
+    return ss.str();
+}
+
+}
+
+#endif //__ANDROID__
+
 namespace poc
 {
 
