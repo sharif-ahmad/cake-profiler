@@ -7,7 +7,7 @@
 namespace poc
 {
 
-class TrivialLogger : public Logger
+class TrivialLogger : public ILogger
 {
 public:
     void log(const std::string& prefix, const std::string& msg) override;

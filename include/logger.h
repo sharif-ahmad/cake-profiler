@@ -6,13 +6,13 @@
 namespace poc
 {
 
-class Logger
+class ILogger
 {
 public:
 
     virtual void log(const std::string& prefix, const std::string& msg) = 0;
 
-    virtual ~Logger() = default;
+    virtual ~ILogger() = default;
 };
 
 }

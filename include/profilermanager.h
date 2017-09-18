@@ -9,7 +9,7 @@
 namespace poc
 {
 
-class Logger;
+class ILogger;
 
 class ProfilerManager final
 {
@@ -20,14 +20,14 @@ class ProfilerManager final
     };
 
     std::map<std::string, ExecutionDurationTracker> durationTrackerMap;
-    std::shared_ptr<Logger> pLogger;
+    std::shared_ptr<ILogger> pLogger;
 
     ProfilerManager() = delete;
     ProfilerManager(const ProfilerManager&) = delete;
 
     ProfilerManager& operator=(const ProfilerManager&) = delete;
 
-    explicit ProfilerManager(std::shared_ptr<Logger> pLogger);
+    explicit ProfilerManager(std::shared_ptr<ILogger> pLogger);
 
 public:
 
@@ -35,7 +35,7 @@ public:
 
     static ProfilerManager& getInstance();
 
-    void setLogger(std::shared_ptr<Logger> logger);
+    void setLogger(std::shared_ptr<ILogger> logger);
     void addExecutionDuration(const std::string& name, duration duration);
 
     void generateReport() const;

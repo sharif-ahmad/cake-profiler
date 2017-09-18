@@ -28,7 +28,7 @@ std::string to_string(T n)
 namespace poc
 {
 
-ProfilerManager::ProfilerManager(std::shared_ptr<Logger> pLogger)
+ProfilerManager::ProfilerManager(std::shared_ptr<ILogger> pLogger)
     : pLogger(pLogger)
 {
 
@@ -45,7 +45,7 @@ ProfilerManager& ProfilerManager::getInstance()
     return profilerManager;
 }
 
-void ProfilerManager::setLogger(std::shared_ptr<Logger> logger)
+void ProfilerManager::setLogger(std::shared_ptr<ILogger> logger)
 {
     pLogger = logger;
 }

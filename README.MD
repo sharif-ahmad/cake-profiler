@@ -32,7 +32,7 @@ cmake --build .
 
 ##### Doc:
 
-* `PROFILE_INIT(logger)` : (optional) Initializes profiler with custom logger instance. Your logger class must be derived from `poc::Logger`. Default logger prints output to `stdout`.
+* `PROFILE_INIT(logger)` : (optional) Initializes profiler with custom logger instance. Your logger class must be derived from `poc::ILogger`. Default logger prints output to `stdout`.
 * `PROFILE_BLOCK(name)` : Profiles a block (surrounded by curly braces) of code. `name` must be unique for each block you want to profile.
 * `PROFILE_BLOCK_START(name)` : This macro along with `PROFILE_BLOCK_END` profiles surrounded statemet(s).
 * `PROFILE_BLOCK_END` : see `PROFILE_BLOCK_START`
