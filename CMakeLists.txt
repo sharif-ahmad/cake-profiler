@@ -7,6 +7,11 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 include_directories("include")
+enable_testing()
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_library(poc_profiler STATIC
     "include/poc.h"
@@ -22,6 +27,10 @@ add_library(poc_profiler STATIC
     "src/profilercontainer.cpp"
     )
 
-add_executable(poc_test "test/test.cpp")
-target_link_libraries(poc_test poc_profiler Threads::Threads)
+
+option(BUILD_TEST "Builds testing subprojects" OFF)
+
+if(BUILD_TEST)
+    add_subdirectory("test")
+endif()
 
