@@ -3,6 +3,7 @@
 
 #include <map>
 #include <memory>
+#include <mutex>
 #include <limits>
 #include <pocdef.h>
 
@@ -27,6 +28,7 @@ class ProfilerManager final
         clock::time_point prevCallTime{};
     };
 
+    mutable std::mutex durationTrackerMutex;
     std::map<std::string, DurationTracker> execDurationTrackerMap;
     std::map<std::string, CallFrequencyTracker> callFrequencyTrackerMap;
     std::shared_ptr<ILogger> pLogger;

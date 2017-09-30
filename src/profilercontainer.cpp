@@ -6,7 +6,7 @@ namespace poc
 
 ProfilerContainer& ProfilerContainer::getInstance()
 {
-    static ProfilerContainer profilerContainer;
+    thread_local ProfilerContainer profilerContainer;
     return profilerContainer;
 }
 

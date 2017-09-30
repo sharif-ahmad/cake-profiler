@@ -52,6 +52,8 @@ void ProfilerManager::setLogger(std::shared_ptr<ILogger> logger)
 
 void ProfilerManager::addExecutionDuration(const std::string& name, duration duration)
 {
+    std::lock_guard<std::mutex> durationTrackerLock(durationTrackerMutex);
+
     auto& tracker = execDurationTrackerMap[name];
     tracker.update(duration);
 }
@@ -86,12 +88,16 @@ void ProfilerManager::generateReport() const
 
     pLogger->log("Tracker", "Execution duration");
 
-    for(const auto& p : execDurationTrackerMap)
     {
-        const auto& name = p.first;
-        const auto& tracker = p.second;
+        std::lock_guard<std::mutex> durationTrackerLock(durationTrackerMutex);
 
-        pLogger->log(name, reportFromTracker(tracker));
+        for (const auto& p : execDurationTrackerMap)
+        {
+            const auto& name = p.first;
+            const auto& tracker = p.second;
+
+            pLogger->log(name, reportFromTracker(tracker));
+        }
     }
 
     pLogger->log("Tracker", "Call frequency duration");
