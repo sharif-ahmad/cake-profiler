@@ -11,6 +11,13 @@ void function_test()
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }
 
+void function_frequency_test()
+{
+    PROFILE_FUNCTION_FREQUENCY;
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
+
+
 
 void block_test()
 {
@@ -42,6 +49,23 @@ int main(int argc, char* argv[])
     for(auto i = 0; i < 10; ++i)
     {
         function_test();
+    }
+
+    std::vector<std::thread> tv;
+    for (auto i = 0; i < 10; ++i)
+    {
+        tv.emplace_back(function_test);
+    }
+
+    for (auto i = 0; i < 10; ++i)
+    {
+        tv[i].join();
+    }
+
+
+    for (auto i = 0; i < 10; ++i)
+    {
+        function_frequency_test();
     }
 
     block_test();
