@@ -52,17 +52,27 @@ void ProfilerManager::setLogger(std::shared_ptr<ILogger> logger)
 
 void ProfilerManager::addExecutionDuration(const std::string& name, duration duration)
 {
-    auto& tracker = durationTrackerMap[name];
+    auto& tracker = execDurationTrackerMap[name];
+    tracker.update(duration);
+}
 
-    tracker.min = std::min(tracker.min, duration);
-    tracker.max = std::max(tracker.max, duration);
-    tracker.sum += duration;
-    tracker.count++;
+void ProfilerManager::addCallTime(const std::string& name, const clock::time_point& time)
+{
+    auto iter = callFrequencyTrackerMap.find(name);
+    if (iter != callFrequencyTrackerMap.end())
+    {
+        auto& prevTime = iter->second.prevCallTime;
+        auto& tracker = iter->second.durationTracker;
+
+        tracker.update(time - prevTime);
+    }
+
+    callFrequencyTrackerMap[name].prevCallTime = time;
 }
 
 void ProfilerManager::generateReport() const
 {
-    auto reportFromTracker = [](const ExecutionDurationTracker& tracker)
+    auto reportFromTracker = [](const DurationTracker& tracker)
     {
         using std::chrono::duration_cast;
 
@@ -74,13 +84,40 @@ void ProfilerManager::generateReport() const
         return ret;
     };
 
-    for(const auto& p : durationTrackerMap)
+    pLogger->log("Tracker", "Execution duration");
+
+    for(const auto& p : execDurationTrackerMap)
     {
         const auto& name = p.first;
         const auto& tracker = p.second;
 
         pLogger->log(name, reportFromTracker(tracker));
     }
+
+    pLogger->log("Tracker", "Call frequency duration");
+    
+    for(const auto& p : callFrequencyTrackerMap)
+    {
+        const auto& name = p.first;
+        const auto& tracker = p.second.durationTracker;
+
+        if(tracker.count)
+        {
+            pLogger->log(name, reportFromTracker(tracker));
+        }
+        else
+        {
+            pLogger->log(name, "Call count was not enough to measure frequency.");
+        }
+    }
+}
+
+void ProfilerManager::DurationTracker::update(const duration& duration)
+{
+    min = std::min(min, duration);
+    max = std::max(max, duration);
+    sum += duration;
+    count++;
 }
 
 }

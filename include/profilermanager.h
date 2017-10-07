@@ -13,13 +13,22 @@ class ILogger;
 
 class ProfilerManager final
 {
-    struct ExecutionDurationTracker
+    struct DurationTracker
     {
         duration min{duration::max()}, max{duration::min()}, sum{duration::zero()};
         size_t count{0};
+
+        void update(const duration& duration);
     };
 
-    std::map<std::string, ExecutionDurationTracker> durationTrackerMap;
+    struct CallFrequencyTracker
+    {
+        DurationTracker durationTracker;
+        clock::time_point prevCallTime{};
+    };
+
+    std::map<std::string, DurationTracker> execDurationTrackerMap;
+    std::map<std::string, CallFrequencyTracker> callFrequencyTrackerMap;
     std::shared_ptr<ILogger> pLogger;
 
     ProfilerManager() = delete;
@@ -37,6 +46,8 @@ public:
 
     void setLogger(std::shared_ptr<ILogger> logger);
     void addExecutionDuration(const std::string& name, duration duration);
+
+    void addCallTime(const std::string& name, const clock::time_point& time);
 
     void generateReport() const;
 };
