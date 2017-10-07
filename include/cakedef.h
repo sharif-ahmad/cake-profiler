@@ -1,9 +1,9 @@
-#ifndef __POCDEF_H__
-#define __POCDEF_H__
+#ifndef __CAKEDEF_H__
+#define __CAKEDEF_H__
 
 #include <chrono>
 
-namespace poc
+namespace cake
 {
 
 using clock = std::chrono::high_resolution_clock;
@@ -14,4 +14,4 @@ using time_unit = std::chrono::milliseconds;
 
 }
 
-#endif // __POCDEF_H__
+#endif // __CAKEDEF_H__

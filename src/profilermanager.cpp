@@ -25,7 +25,7 @@ std::string to_string(T n)
 
 #endif //__ANDROID__
 
-namespace poc
+namespace cake
 {
 
 ProfilerManager::ProfilerManager(std::shared_ptr<ILogger> pLogger)

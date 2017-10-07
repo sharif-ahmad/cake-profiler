@@ -1,9 +1,9 @@
 #ifndef __PROFILER_H__
 #define __PROFILER_H__
 #include <string>
-#include <pocdef.h>
+#include <cakedef.h>
 
-namespace poc // piece of cake
+namespace cake
 {
 
 class ProfilerManager;

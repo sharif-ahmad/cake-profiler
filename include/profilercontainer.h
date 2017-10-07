@@ -6,7 +6,7 @@
 #include <memory>
 
 
-namespace poc
+namespace cake
 {
 
 class ProfilerContainer final
