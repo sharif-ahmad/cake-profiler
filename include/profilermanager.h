@@ -5,9 +5,9 @@
 #include <memory>
 #include <mutex>
 #include <limits>
-#include <pocdef.h>
+#include <cakedef.h>
 
-namespace poc
+namespace cake
 {
 
 class ILogger;

@@ -1,7 +1,7 @@
 #include <profiler.h>
 #include <profilermanager.h>
 
-namespace poc
+namespace cake
 {
 
 Profiler::Profiler(const std::string& name, ProfilerManager& manager)

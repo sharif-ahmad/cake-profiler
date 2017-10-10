@@ -3,7 +3,7 @@
 
 #include <string>
 
-namespace poc
+namespace cake
 {
 
 class ILogger

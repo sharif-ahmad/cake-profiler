@@ -1,7 +1,7 @@
 
 #include <profilercontainer.h>
 
-namespace poc
+namespace cake
 {
 
 ProfilerContainer& ProfilerContainer::getInstance()

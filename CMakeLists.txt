@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project (piece_of_cake_profiler)
+project (cake_profiler)
 
 set (CMAKE_CXX_STANDARD 11)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
@@ -8,9 +8,9 @@ find_package(Threads REQUIRED)
 
 include_directories("include")
 
-add_library(poc_profiler STATIC
-    "include/poc.h"
-    "include/pocdef.h"
+add_library(cake_profiler STATIC
+    "include/cake.h"
+    "include/cakedef.h"
     "include/profiler.h"
     "include/profilermanager.h"
     "include/logger.h"
@@ -22,6 +22,6 @@ add_library(poc_profiler STATIC
     "src/profilercontainer.cpp"
     )
 
-add_executable(poc_test "test/test.cpp")
-target_link_libraries(poc_test poc_profiler Threads::Threads)
+add_executable(cake_test "test/test.cpp")
+target_link_libraries(cake_test cake_profiler Threads::Threads)
 

@@ -4,7 +4,7 @@
 #include <logger.h>
 #include <string>
 
-namespace poc
+namespace cake
 {
 
 class TrivialLogger : public ILogger

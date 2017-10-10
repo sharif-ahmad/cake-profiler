@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-namespace poc
+namespace cake
 {
 
 void TrivialLogger::log(const std::string& prefix, const std::string& msg)
