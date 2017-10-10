@@ -6,7 +6,7 @@ __Cake profiler__ is a simple performance profiler for c++. It tracks functions 
 __cake-profiler__ uses CMake as build system. So, it is easy to generate Makefiles or project files for different compiler and/or IDE.
 
 ```
-git clone https://github.com/sharif-ahmad/poc-profiler.git cake-profiler
+git clone https://github.com/sharif-ahmad/cake-profiler.git cake-profiler
 cd cake-profiler
 mkdir build && cd build
 cmake ..
@@ -15,7 +15,7 @@ cmake --build .
 *For android build:*
 
 ```
-git clone https://github.com/sharif-ahmad/poc-profiler.git cake-profiler
+git clone https://github.com/sharif-ahmad/cake-profiler.git cake-profiler
 cd cake-profiler
 mkdir build && cd build
 cmake .. \
