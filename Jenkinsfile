@@ -1,10 +1,15 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'Linux'
+    }
+
+  }
   stages {
     stage('Build') {
       agent {
-        dockerfile {
-          filename 'Dockerfile'
+        node {
+          label 'Linux'
         }
 
       }
